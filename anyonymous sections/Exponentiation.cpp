@@ -23,25 +23,33 @@ using namespace std;
 #define vpi vector<pi>
 const ll Mod = 1e9 + 7;
 
-int binary_expo(int a, int b){
-	int ans = 1;
-	while(b){
-		if(b &1 ){
-			ans = (1LL * ans % Mod * a % Mod) % Mod;
-		}
-		a  = (a % Mod * a % Mod) % Mod;
-		b /=2;
-	} 
-	return ans;
-}
+// int binary_expo(int a, int b){
+// 	int ans = 1;
+// 	while(b){
+// 		if(b &1 ){
+// 			ans = (1LL * ans % Mod * a % Mod) % Mod;
+// 		}
+// 		a  = (a % Mod * a % Mod) % Mod;
+// 		b /=2;
+// 	} 
+// 	return ans;
+// }
 
+int binary_expo(int a, int b){
+	if(b == 0) return 1;
+    int res = binary_expo(a, b / 2);
+    res = (1LL *res *res) % Mod;
+    if(b & 1){
+        return (1LL * a * res)  % Mod;
+    }
+    return res % Mod;
+		
+}
 void Puzzle_Out()
 {
-    int n;	cin >> n;
-    while(n--){
     	int a, b;	cin >> a>> b;
     	cout << binary_expo(a, b) << nl;
-    }
+    
 }
 
 
@@ -51,7 +59,7 @@ int main()
     cin.tie(NULL);
 
     int t = 1;
-    // cin >> t;
+    cin >> t;
     for (int tc = 1; tc <= t; tc++)
         Puzzle_Out();
 

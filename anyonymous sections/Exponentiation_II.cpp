@@ -23,11 +23,11 @@ using namespace std;
 #define vpi vector<pi>
 const ll Mod = 1e9 + 7;
 
-int binary_expo(int a, int b){
+int binary_expo(int a, int b, int mod){
 	int ans = 1;
 	while(b){
-		if(b & 1) ans = (ans % Mod * a % Mod) % Mod;
-		a = (a %  Mod * a % Mod) % Mod;
+		if(b & 1) ans = (ans % mod * a % mod) % mod;
+		a = (a %  mod * a % mod) % mod;
 		b >>= 1;
 	}
 	return ans;
@@ -36,7 +36,7 @@ int binary_expo(int a, int b){
 void Puzzle_Out()
 {
     int a, b, c;	cin >> a >> b >> c;
-    cout << binary_expo(binary_expo(a, b) % Mod, c % Mod) << nl;
+    cout << binary_expo(binary_expo(a, b, Mod -1) , c , Mod) << nl;
 }
 
 
