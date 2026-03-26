@@ -13,30 +13,30 @@ using namespace std;
 // 1. find_by_order(k) -> returns iterator to the kth smallest element (0 based)
 // 2. order_of_key(k)  -> returns the number of elements strictly less than k
 
-#define ll long long int
-#define llmax LLONG_MAX
+typedef long long ll;
+typedef vector<int> vi;
+typedef pair<int,int> pi;
+#define F first
+#define S second
+#define PB push_back
 #define nl '\n'
 #define rall(var) (var).rbegin(), (var).rend()
 #define all(var) (var).begin(), (var).end()
-#define vi vector<int>
-#define pi pair<int,int>
-#define vpi vector<pi>
 const ll Mod = 1e9 + 7;
-
-ll binary_expo(ll a, ll b, ll mod){
-	ll ans = 1;
-	while(b){
-		if(b & 1) ans = (ans % mod * a % mod) % mod;
-		a = (a %  mod * a % mod) % mod;
-		b >>= 1;
+const int big = 1e6 + 5;
+vector<int> Div(big + 1);
+void getDiv(){
+	for(int i = 1; i <= big; i++){
+		for(int j = i; j <= big; j+=i){
+			Div[j]++;
+		}
 	}
-	return ans;
 }
 
 void Puzzle_Out()
 {
-    ll a, b, c;	cin >> a >> b >> c;
-    cout << binary_expo(a, binary_expo(b, c, Mod - 1), Mod) << nl;
+    int n;	cin >> n;
+    cout << Div[n]<< nl;
 }
 
 
@@ -44,7 +44,7 @@ int main()
 {
     ios::sync_with_stdio(false);
     cin.tie(NULL);
-
+    getDiv();
     int t = 1;
     cin >> t;
     for (int tc = 1; tc <= t; tc++)
