@@ -31,7 +31,20 @@ void Puzzle_Out()
     vi a(n);
     for(int &i : a) cin >> i;
 
-    
+    const int maxN = *max_element(all(a));
+    vector<int> freq(maxN + 1, 0);
+    for(int i = 0; i < n; i++) freq[a[i]]++;
+    for(int d = maxN ; d >= 1; d--){
+        int cnt = 0;
+        for(int mul = d; mul <= maxN; mul += d){
+            cnt += freq[mul];
+            if(cnt >= 2){
+                cout << d<< nl;
+                return;
+            }
+        }
+    }
+    cout << 1 << nl;
 }
 
 
